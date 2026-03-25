@@ -17,7 +17,7 @@ GhostScanner is a fast, modular, open-source vulnerability scanner written in Py
 ## Installation
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/ghostscanner.git
+   git clone https://github.com/BasselAtef/ghostscanner.git
    cd ghostscanner
    ```
 2. Install the required dependencies:
