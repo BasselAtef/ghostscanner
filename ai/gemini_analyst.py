@@ -1,6 +1,6 @@
 import os
 import json
-import google.generativeai as genai
+from google import genai
 from rich.console import Console
 
 console = Console()
@@ -10,10 +10,7 @@ def analyze_findings(findings, verbose):
     if not api_key:
         return "Error: GEMINI_API_KEY not set."
         
-    genai.configure(api_key=api_key)
-    
-    # We use gemini-2.0-flash as requested
-    model = genai.GenerativeModel("gemini-2.0-flash")
+    client = genai.Client(api_key=api_key)
     
     prompt = f"""
     You are a senior penetration tester and cybersecurity expert.
@@ -31,7 +28,10 @@ def analyze_findings(findings, verbose):
     """
     
     try:
-        response = model.generate_content(prompt)
+        response = client.models.generate_content(
+            model='gemini-2.0-flash',
+            contents=prompt,
+        )
         return response.text
     except Exception as e:
         if verbose:
